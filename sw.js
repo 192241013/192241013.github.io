@@ -9,9 +9,9 @@ const CACHE = "dmppwa-1.00";
 const ARCHIVOS = [
   "cmp/mi-footer.js",
   "css/estilos.css",
-  "img/pwa-256.png",
-  "img/pwa-1024.png",
-  "img/pwa-2048.png",
+  "img/pwa 256.png",
+  "img/pwa 1024.png",
+  "img/pwa 2048.png",
   "js/registraServiceWorker.js",
   "pwa-256.ico",
   "index.html",
