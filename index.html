@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ejemplo de PWA</title>
+    <title>PWA LVPP</title>
     <script src="js/registraServiceWorker.js"></script>
 
     <!-- Ícono para la página web. Debe ponerse en la raíz de la página. -->
@@ -45,9 +45,9 @@
            * definiciones de estilos. Deben iniciar con -- y colocarse en el
            * elemento raíz. */
           --color-primario: rgb(255, 255, 255);
-          --color-primario-fondo: #3e6bbe;
+          --color-primario-fondo: #3DB05E;
           --color-contenido: rgb(0, 0, 0);
-          --color-contenido-fondo: white;
+          --color-contenido-fondo: gray;
           --color-control-sin-foco: gray;
           --color-control-con-foco: #03a9f4;
           --color-control-error: #b00020;
@@ -279,15 +279,18 @@
 
         <campo-dinámico>
           <input type="text" id="w" required pattern="[0-9]" title="Ingresa solo números enteros"/>
-          <!-- <input id="email" type="email" autocomplete="off"> -->
+
           <label for="w">w: Velocidad angular (rad/s)</label>
+          <small>Requerido</small>
         </campo-dinámico>
 
         <campo-dinámico>
           <input type="text" id="R" required pattern="[0-9]" title="Ingresa solo números enteros"/>
           <!-- <input id="email" type="email" autocomplete="off"> -->
-          <label for="R">R: Radio de la Curvatura de la trayectoria (m)</label>
-        </campo-dinámico>      
+          <label for="R">v: Velocidad (m/s)</label>
+          <small>Requerido</small>
+        </campo-dinámico>
+
       </div>
       
     </form>
@@ -296,9 +299,9 @@
      
      function calcular() {
        var n1 = parseInt(document.getElementById('w').value);
-       var n1 = parseInt(document.getElementById('R').value);
-       var res = n1 * n2;
-       alert('La velocidad es: '+ res +' m/s.');
+       var n2 = parseInt(document.getElementById('R').value);
+       var res = (n1 * n2);
+       alert('Lavelocidad es: '+ res +' m/s.');
      }
      
  </script> 
@@ -310,4 +313,3 @@
     </footer>
   </body>
 </html>
-
