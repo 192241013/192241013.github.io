@@ -263,7 +263,7 @@
     <form action="javascript:;">
       <header>
         <div class="toolbar">
-          <h1>M.R.U.</h1>
+          <h1>M.C.U.</h1>
 
           <span class="acciones">
             <button onclick="calcular();"><span class="material-icons">save</span></button>
@@ -272,28 +272,21 @@
         </div>
       </header>
       <div class="contenido">
-        <center><p><b>Movimiento Rectilíneo Uniforme: <output id="agent"></output></b></p>
-        <p>Un movimiento es rectilíneo cuando un objeto describe una trayectoria recta a velocidad constante, dado que su aceleración es nula.​</p>
-         <b>Fórmula: s=s0+v*t</b>
-         <p>s = posición final</p></center>
+        <center><p><b>Movimiento Circular Uniforme: <output id="agent"></output></b></p>
+        <p>El movimiento circular uniforme (m.c.u.) es un movimiento de trayectoria circular en el que la velocidad angular es constante.​</p>
+         <b>Fórmula: v=w*R</b>
+         <p>s = Velocidad en (m/s)</p></center>
 
         <campo-dinámico>
-          <input type="text" id="s0" required pattern="[0-9]" title="Ingresa solo números enteros"/>
-
-          <label for="s0">s0: Posición inicial (m)</label>
-          <small>Requerido</small>
+          <input type="text" id="w" required pattern="[0-9]" title="Ingresa solo números enteros"/>
+          <!-- <input id="email" type="email" autocomplete="off"> -->
+          <label for="w">w: Velocidad angular (rad/s)</label>
         </campo-dinámico>
 
         <campo-dinámico>
-          <input type="text" id="v" required pattern="[0-9]" title="Ingresa solo números enteros"/>
+          <input type="text" id="R" required pattern="[0-9]" title="Ingresa solo números enteros"/>
           <!-- <input id="email" type="email" autocomplete="off"> -->
-          <label for="v">v: Velocidad (m/s)</label>
-        </campo-dinámico>
-
-        <campo-dinámico>
-          <input type="text" id="t" required pattern="[0-9]" title="Ingresa solo números enteros"/>
-          <!-- <input id="email" type="email" autocomplete="off"> -->
-          <label for="t">t: Intervalo de tiempo (s)</label>
+          <label for="R">R: Radio de la Curvatura de la trayectoria (m)</label>
         </campo-dinámico>      
       </div>
       
@@ -302,11 +295,10 @@
  <script>
      
      function calcular() {
-       var n1 = parseInt(document.getElementById('s0').value);
-       var n2 = parseInt(document.getElementById('v').value);
-       var n3 = parseInt(document.getElementById('t').value);
-       var res = (n1 + n2) * n3;
-       alert('La posición final es: '+ res +' mts.');
+       var n1 = parseInt(document.getElementById('w').value);
+       var n1 = parseInt(document.getElementById('R').value);
+       var res = n1 * n2;
+       alert('La velocidad en: '+ res +' m/s.');
      }
      
  </script> 
@@ -318,3 +310,4 @@
     </footer>
   </body>
 </html>
+
