@@ -7,7 +7,7 @@
     <script src="js/registraServiceWorker.js"></script>
 
     <!-- Ícono para la página web. Debe ponerse en la raíz de la página. -->
-    <link rel="icon" sizes="32x32" href="favicon.ico">
+    <link rel="icon" sizes="32x32" href="calc.ico">
 
     <!-- Color de la barra de navegación de Chrome en dispositivos móviles. -->
     <meta name="theme-color" content="#81d4f4">
@@ -20,15 +20,297 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <link rel="apple-touch-icon" href="img/icono2048.png">
-    <link rel="apple-touch-icon" sizes="256x256" href="img/icono256.png">
-    <link rel="apple-touch-icon" sizes="1024x1024" href="img/icono1024.png">
-    <link rel="apple-touch-icon" sizes="2048x2048" href="img/icono2048.png">
+    <link rel="apple-touch-icon" sizes="256x256" href="img/pwa 256.png">
+    <link rel="apple-touch-icon" sizes="1024x1024" href="img/pwa 1022.png">
+    <link rel="apple-touch-icon" sizes="2048x2048" href="img/pwa 2048.png">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
 
     <script type="module" src="cmp/mi-footer.js"></script>
     <link rel="stylesheet" href="css/estilos.css">
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+
+      <style>
+        /* :root
+         * Elemento raíz del documento. En este caso corresponde al elemento html.
+         */
+        :root {
+          /* custom properties
+           * Valores que puede definir el desarrollador y reutilizar en todas las
+           * definiciones de estilos. Deben iniciar con -- y colocarse en el
+           * elemento raíz. */
+          --color-primario: rgb(255, 255, 255);
+          --color-primario-fondo: #3e6bbe;
+          --color-contenido: rgb(0, 0, 0);
+          --color-contenido-fondo: white;
+          --color-control-sin-foco: gray;
+          --color-control-con-foco: #03a9f4;
+          --color-control-error: #b00020;
+          --color-control-fondo: #eeeeee;
+          --color-active: #4646462c;
+          /** Los 2 primeros fonts son para apple y "Roboto" es para Android. */
+          --font-family: -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+          /* Uso de la custom property "--color-contenido". */
+          color: var(--color-contenido);
+          background-color: var(--color-contenido-fondo);
+          font-family: var(--font-family);
+        }
+  
+        body {
+          margin: 0;
+        }
+  
+        header {
+          color: var(--color-primario);
+          background-color: var(--color-primario-fondo);
+          position: sticky;
+          top: 0;
+          z-index: 1;
+        }
+  
+        .toolbar {
+          display: flex;
+          padding: 20px;
+          position: relative;
+        }
+  
+        /* selector anidado: .toolbar h1
+         * se aplica a todos los h1 que estén dentro de un elemento de la clase
+         * "toolbar" */
+        .toolbar h1 {
+          margin: 0 auto 0 0;
+          padding: 0;
+          font-size: 1.25rem;
+        }
+  
+        body.ios .toolbar h1 {
+          margin: 0 auto 0 auto;
+        }
+  
+        body.ios .toolbar .acciones {
+          position: absolute;
+          top: 1rem;
+          right: 1rem;
+        }
+  
+        .toolbar button {
+          border: none;
+          padding: 0;
+          margin: 0 0 0 1.5rem;
+          background-color: transparent;
+          /* Quita una especie de borde usualmente usado para indicar que el
+           * elemento tiene el foco. */
+          outline: none;
+        }
+  
+        .toolbar button:active {
+          background-color: var(--color-active);
+        }
+  
+        .contenido {
+          padding: 0 1rem;
+        }
+  
+        campo-dinámico {
+          display: block;
+          position: relative;
+          color: var(--color-control-sin-foco);
+          background-color: var(--color-control-fondo);
+          border-top-left-radius: 4px;
+          border-top-right-radius: 4px;
+          margin: 1rem 0;
+          padding: 1.25rem 0 0 0;
+        }
+  
+        campo-dinámico label {
+          position: absolute;
+          top: 1.75rem;
+          left: 1rem;
+          font-size: 1rem;
+          color: var(--color-control-sin-foco);
+          /* transition: 0.7s ease-in
+           * Cuando algún atributo cambie, lo hace lentamente
+           * 0.7s
+           * La transición tarda 0.7 segundos
+           * ease-in
+           * La transición inicia lento y luego acelera */
+          transition: 0.7s ease-in;
+        }
+  
+        /* La misma definición de estilos se aplicaca a 2 selectores diferentes
+         * separados por ",":
+         * campo-dinámico .control_sin_foco+label
+         *   Selecciona a un elemento "label" ubicado inmediatamente después de un
+         *   elemento hermano de la clase "control_sin_foco" y ambos elementos
+         *   están dentro de un custom element de tipo "campo-dinámico".
+         * campo-dinámico :focus+label
+         *   Selecciona a un elemento "label" ubicado inmediatamente después de un
+         *   elemento hermano que tiene el foco del teclado y ambos elementos
+         *   están dentro de un custom element de tipo "campo-dinámico". */
+        campo-dinámico .control_sin_foco+label,
+        campo-dinámico :focus+label {
+          top: 0.5rem;
+          font-size: 0.75rem;
+        }
+  
+        /* La misma definición de estilos se aplicaca a 3 selectores diferentes
+         * separados por ",":
+         * campo-dinámico select
+         *   Selecciona a un elemento "select" dentro de un custom element de tipo
+         *   "campo-dinámico".
+         * campo-dinámico input
+         *   Selecciona a un elemento "input" dentro de un custom element de tipo
+         *   "campo-dinámico".
+         * campo-dinámico textarea
+         *   Selecciona a un elemento "textarea" dentro de un custom element de
+         *   tipo "campo-dinámico".
+         *   Un "textarea" es un control de captura de texto de varios renglones.
+         */
+        campo-dinámico select,
+        campo-dinámico input,
+        campo-dinámico textarea {
+          box-sizing: border-box;
+          background-color: transparent !important;
+          padding: 0.5rem 1rem 0.5rem 1rem;
+          font-size: 1rem;
+          font-family: var(--font-family);
+          border: none;
+          border-bottom: 2px solid var(--color-control-sin-foco);
+          resize: none;
+          outline: none;
+          width: 100%;
+          transition: 0.7s ease-in;
+        }
+  
+        /* Ayuda dentro de un campo dinámico. El elemento "small" se usa para
+         * comentarios secundarios y se muestra en letras pequeñas. */
+        campo-dinámico small {
+          display: block;
+          height: 1em;
+          font-size: 0.75rem;
+          padding-left: 1rem;
+          background-color: var(--color-contenido-fondo);
+          transition: 0.7s ease-in;
+        }
+  
+        campo-dinámico :focus+label {
+          color: var(--color-control-con-foco);
+        }
+  
+        campo-dinámico select:focus,
+        campo-dinámico input:focus,
+        campo-dinámico textarea:focus {
+          border-bottom-color: var(--color-control-con-foco);
+        }
+  
+        /* :invalid
+         * Pseudoclase para seleccionar elementos que no cumplen las reglas de
+         * validación. */
+        campo-dinámico select:invalid,
+        campo-dinámico input:invalid,
+        campo-dinámico textarea:invalid {
+          border-bottom-color: var(--color-control-error);
+        }
+  
+        /* campo-dinámico :invalid~small
+         *   Selecciona a los elementos "small" que van después de un elemento
+         *   hermano inválido y ambos elementos están dentro de un custom element
+         *   de tipo "campo-dinámico". */
+        campo-dinámico :invalid+label,
+        campo-dinámico :invalid~small {
+          color: var(--color-control-error);
+        }
+
+
+
+
+
+      </style>
+      <script>
+        class CampoDinámico extends HTMLElement {
+          connectedCallback() {
+            this.ganaFoco = this.ganaFoco.bind(this);
+            this.pierdeFoco = this.pierdeFoco.bind(this);
+            this.addEventListener("focus", this.ganaFoco, true);
+            this.addEventListener("focusout", this.pierdeFoco, true);
+          }
+          get control() {
+            return this.querySelector("input,textarea,select");
+          }
+          ganaFoco() {
+            this.control.classList.remove("control_sin_foco");
+          }
+          pierdeFoco() {
+            const control = this.control;
+            if (control.value.length === 0) {
+              control.classList.remove("control_sin_foco");
+            } else {
+              control.classList.add("control_sin_foco");
+            }
+          }
+        }
+        customElements.define("campo-dinámico", CampoDinámico);
+      </script>
+
+    </head>
   <body>
-    <h1>Ejemplo de PWA</h1>
-    <p>Hola</p>
+
+    <form action="javascript:;">
+      <header>
+        <div class="toolbar">
+          <h1>M.R.U.</h1>
+
+          <span class="acciones">
+            <button onclick="calcular();"><span class="material-icons">save</span></button>
+          </span>
+        
+        </div>
+      </header>
+      <div class="contenido">
+        <center><p><b>Movimiento Rectilíneo Uniforme: <output id="agent"></output></b></p>
+        <p>Un movimiento es rectilíneo cuando un objeto describe una trayectoria recta a velocidad constante, dado que su aceleración es nula.​</p>
+         <b>Fórmula: s=s0+v*t</b>
+         <p>s = posición final</p></center>
+
+        <campo-dinámico>
+          <input type="text" id="s0" required pattern="[0-9]" title="Ingresa solo números enteros"/>
+
+          <label for="s0">s0: Posición inicial (m)</label>
+          <small>Requerido</small>
+        </campo-dinámico>
+
+        <campo-dinámico>
+          <input type="text" id="v" required pattern="[0-9]" title="Ingresa solo números enteros"/>
+          <!-- <input id="email" type="email" autocomplete="off"> -->
+          <label for="v">v: Velocidad (m/s)</label>
+        </campo-dinámico>
+
+        <campo-dinámico>
+          <input type="text" id="t" required pattern="[0-9]" title="Ingresa solo números enteros"/>
+          <!-- <input id="email" type="email" autocomplete="off"> -->
+          <label for="t">t: Intervalo de tiempo (s)</label>
+        </campo-dinámico>      
+      </div>
+      
+    </form>
+    <center><button onclick="calcular();">calcular</button></center>
+ <script>
+     
+     function calcular() {
+       var n1 = parseInt(document.getElementById('s0').value);
+       var n2 = parseInt(document.getElementById('v').value);
+       var n3 = parseInt(document.getElementById('t').value);
+       var res = (n1 + n2) * n3;
+       alert('La posición final es: '+ res +' mts.');
+     }
+     
+ </script> 
+
     <footer>
       <p>
         <mi-footer></mi-footer>
