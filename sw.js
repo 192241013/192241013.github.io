@@ -13,7 +13,7 @@ const ARCHIVOS = [
   "img/pwa 1024.png",
   "img/pwa 2048.png",
   "js/registraServiceWorker.js",
-  "pwa-256.ico",
+  "pwa-32.ico",
   "index.html",
   "manifest.json",
   '/'
